@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>計算機</title>
+</head>
+<!-- 1.按數字鍵，能輸入進到框框裡 -->
+<!-- 2.做運算(+ - * /) -->
+<!-- 3.AC可歸零 -->
+<!-- 4.按"enter鍵"能操作 -->
+
+<body>
+    <div class="container" style="width:350px;">
+        <div class="rounded border border-dark mt-5">
+            <input type="text" class="text-right h3 font-weight-normal mt-2 ml-2" style="width:300px;" id="usernum">
+            <div class="container mt-2">
+                <div class="row">
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-block border btn-lg"
+                            onclick="doNulling()">AC</button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-block border btn-lg">+/-</button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-block border btn-lg">%</button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-block border btn-lg calnum"
+                            value="/">/</button>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-block border btn-lg input-pad">7</button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-block border btn-lg input-pad">8</button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-block border btn-lg input-pad">9</button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-block border btn-lg calnum"
+                            value="*">*</button>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-block border btn-lg input-pad">4</button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-block border btn-lg input-pad">5</button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-block border btn-lg input-pad">6</button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-block border btn-lg calnum"
+                            value="-">-</button>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-block border btn-lg input-pad">1</button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-block border btn-lg input-pad">2</button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-block border btn-lg input-pad">3</button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-block border btn-lg calnum"
+                            value="+">+</button>
+                    </div>
+                </div>
+                <br />
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <button type="button" class="btn btn-secondary btn-block border btn-lg input-pad">0</button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-block border btn-lg input-pad">.</button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-block border btn-lg" onclick="docal()"
+                            id="equal">=</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <script>
+        var usernum = document.getElementById("usernum");
+        var sum = 0;
+        var number1 = "";
+        var number2 = "";
+        var mathinput = "";
+        //AC鍵可操作
+        function doNulling() {
+            usernum.value = "";
+            number1 = "";
+            number2 = "";
+        }
+
+        //數字鍵可以按
+        var inputButton = document.getElementsByClassName("input-pad");
+        for (var i = 0; i < inputButton.length; i++) {
+            inputButton[i].onclick = inder;
+        }
+        function inder() {
+            var text = this.innerHTML;
+            usernum.value += text; //更改框的內容
+            if (number1 == "") {
+                number1 = text;
+            }
+            else {
+                number2 = text;
+            }
+        }
+
+        //計算鍵可以按
+        var calButton = document.getElementsByClassName("calnum");
+        for (var j = 0; j < calButton.length; j++) {
+            calButton[j].onclick = docalnum;
+        }
+        function docalnum() {
+            mathinput = this.value;
+            usernum.value = "";
+            // docalculator(mathinput);
+        }
+
+        //計算
+        function docal() {
+            if (mathinput == "+") {
+                if (number2 != "") {
+                    sum = parseFloat(number1) + parseFloat(number2);
+                    document.getElementById("usernum").value = sum;
+                }
+            }
+            else if (mathinput == "-") {
+                if (number2 != "") {
+                    sum = parseFloat(number1) - parseFloat(number2);
+                    document.getElementById("usernum").value = sum;
+                }
+            }
+            else if (mathinput == "*") {
+                if (number2 != "") {
+                    sum = parseFloat(number1) * parseFloat(number2);
+                    document.getElementById("usernum").value = sum;
+                }
+            }
+            else if (mathinput == "/") {
+                if (number2 != "") {
+                    sum = parseFloat(number1) / parseFloat(number2);
+                    document.getElementById("usernum").value  = sum;
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>
